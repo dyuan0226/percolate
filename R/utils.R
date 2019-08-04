@@ -2,12 +2,7 @@ library(assertthat)
 library(tidyverse)
 
 
-
-
-
-
-
-#' generate_board_mat
+#' generate_board_mat()
 #'
 #' @param n specifies the size of one side of the board (must be positive integer)
 #' @param p specifies the proportion of the board that is blocked (between 0 an 1)
@@ -42,3 +37,29 @@ generate_board_mat <- function(n=5, p=0.25){
   blocked_tiles <- sample(1:num_tiles, size=num_blocked, replace=FALSE)
   matrix(ifelse(1:num_tiles %in% blocked_tiles, 1, 0), nrow=n)
 }
+
+generate_board_mat()
+generate_board_mat(n = 8, p = 0.75)
+
+#' is_valid()
+#'
+#' @param mat specifies our test variables
+#'
+#' @return whether or not `mat` is a valid board
+#' @examples is_valid(generate_board_mat())
+#' is_valid(generate_board_mat(n=1))
+is_valid <- function(mat){
+  assert_that(is.matrix(mat), msg="must be a matrix")
+  assert_that(nrow(mat) == ncol(mat), msg="must be square")
+  assert_that(all(mat %in% 0:2), msg="values must be 0, 1, 2")
+  return(TRUE)
+}
+
+is_valid(generate_board_mat())
+is_valid(generate_board_mat(n=1))
+
+
+
+
+
+
