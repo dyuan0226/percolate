@@ -1,5 +1,4 @@
 library(assertthat)
-library(testthat)
 library(tidyverse)
 
 
@@ -34,6 +33,8 @@ library(tidyverse)
 #' [7,]    1    1    1    1    1    1    1    1
 #' [8,]    0    1    1    1    1    0    0    1
 generate_board_mat <- function(n=5, p=0.25){
+  assert_that(is.numeric(n) && is.numeric(p), msg="n and p must be numerics")
+  assert_that(length(n) == 1 && length(p) == 1, msg="n and p must be single values")
   assert_that(as.integer(n) == n && n > 0, msg="n must be a positive integer")
   assert_that(0<=p && p<=1, msg="p must be between 0 and 1")
   num_tiles <- n^2
