@@ -1,5 +1,4 @@
 library(assertthat)
-library(tidyverse)
 
 
 #' generate_board_mat()
@@ -57,9 +56,3 @@ is_valid <- function(mat){
 
 is_valid(generate_board_mat())
 is_valid(generate_board_mat(n=1))
-
-
-
-
-
-

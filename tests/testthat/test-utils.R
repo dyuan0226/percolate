@@ -1,5 +1,4 @@
 library(testthat)
-library(tidyverse)
 
 
 #Unit tests for generate_board_mat()
@@ -58,18 +57,3 @@ test_that("valid board must be square", {
   fail_board <- matrix(sample(0:2, size=30, replace=TRUE), nrow=6)
   expect_error(is_valid(fail_board))
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
