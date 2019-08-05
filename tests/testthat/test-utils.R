@@ -41,7 +41,7 @@ test_that("testing for valid inputs of generate_board_mat()", {
 })
 
 
-# Unit tests for is_valid()
+#Unit tests for is_valid()
 
 test_that("valid board must be a matrix", {
   fail_board <- sample(0:2, size=25, replace=TRUE)
@@ -56,4 +56,45 @@ test_that("valid board must contain only 0's, 1's, 2's", {
 test_that("valid board must be square", {
   fail_board <- matrix(sample(0:2, size=30, replace=TRUE), nrow=6)
   expect_error(is_valid(fail_board))
+})
+
+
+#Unit tests for read_boards()
+
+test_that("read_boards() reads 50 test boards correctly", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test.txt"
+  boards <- read_boards(path)
+  
+  load(url("https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolate_test.Rdata"))
+  expect_true(identical(attributes(board_list), attributes(boards)))
+})
+
+test_that("read_boards() throws an error on non-square matrices", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test1.txt"
+  expect_error(read_boards(path))
+})
+
+test_that("read_boards() returns NA on matrices that have the wrong characters", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test2.txt"
+  expect_true(is.na(read_boards(path)[[1]]))
+})
+
+test_that("read_boards() throws an error incorrectly formatted files", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test3.txt"
+  expect_error(read_boards(path))
+})
+
+test_that("read_boards() throws an error on non-square matrices", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test4.txt"
+  expect_error(read_boards(path))
+})
+
+test_that("read_boards() throws an error on non-square matrices", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test5.txt"
+  expect_error(read_boards(path))
+})
+
+test_that("read_boards() throws an error on wrong values of n", {
+  path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test6.txt"
+  expect_error(read_boards(path))
 })
