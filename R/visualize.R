@@ -29,10 +29,3 @@ plot.board <- function(x){
           plot.title=element_text(hjust=0.5)) + 
     scale_fill_manual(values=c("0"="black", "1"="white", "2"="lightblue3"))
 }
-
-board_example <- board(matrix(c(0,1,1,1,0,
-                                0,1,1,0,1,
-                                0,0,1,0,0,
-                                0,0,0,2,2,
-                                2,2,2,2,0), 5, 5))
-plot.board(board_example)

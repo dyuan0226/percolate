@@ -33,6 +33,3 @@ is_valid <- function(mat){
   assert_that(all(mat %in% 0:2), msg="values must be 0, 1, 2")
   return(TRUE)
 }
-
-is_valid(generate_board_mat())
-is_valid(generate_board_mat(n=1))
