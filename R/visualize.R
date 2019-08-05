@@ -15,6 +15,7 @@ library(tidyverse)
 #' 2,2,2,2,0), 5, 5))
 #' plot.board(board_example)
 plot.board <- function(x){
+  is_valid(x)
   assert_that(is_valid(x), msg="x must be a valid board")
   assert_that("board" %in% class(x))
   n <- attr(x, "n")
@@ -27,5 +28,7 @@ plot.board <- function(x){
     theme_void() +
     theme(legend.position="none", 
           plot.title=element_text(hjust=0.5)) + 
-    scale_fill_manual(values=c("0"="black", "1"="white", "2"="lightblue3"))
+    scale_fill_manual(values=c("0"="black", "1"="white", "2"="lightblue3")) + 
+    scale_x_reverse() + 
+    coord_flip()
 }
