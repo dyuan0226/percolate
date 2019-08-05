@@ -8,6 +8,8 @@ library(assertthat)
 #' @param p specifies proportion of board blocked, must be between 0 and 1
 #'
 #' @return valid board object with attributes n and p
+#' @examples board(generate_board_mat())
+#' board(n=6, p=0.3)
 board <- function(mat=NULL, n=5, p=0.25){
   if (!is.null(mat)){
     assert_that(is_valid(mat), msg="input mat must be a valid board")

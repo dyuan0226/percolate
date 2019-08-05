@@ -7,25 +7,8 @@ library(assertthat)
 #' @param p specifies the proportion of the board that is blocked (between 0 an 1)
 #'
 #' @return an nxn board with p-proportion squares blocked (delineated by 0's and 1's)
-#' @examples generate_board_mat():
-#'      [,1] [,2] [,3] [,4] [,5]
-#' [1,]    1    1    1    0    0
-#' [2,]    0    1    1    0    1
-#' [3,]    1    1    1    0    1
-#' [4,]    1    1    1    1    1
-#' [5,]    0    1    1    1    1
-#' 
-#' generate_board_mat(n = 8, p = 0.75):
-#' 
-#'      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
-#' [1,]    1    0    1    0    0    1    0    1
-#' [2,]    0    0    0    0    0    0    0    0
-#' [3,]    1    1    0    0    0    0    0    0
-#' [4,]    0    0    0    0    0    0    1    0
-#' [5,]    0    1    0    1    1    0    0    0
-#' [6,]    1    0    0    1    0    0    0    0
-#' [7,]    0    0    0    0    0    0    1    1
-#' [8,]    0    0    0    0    0    1    1    0
+#' @examples generate_board_mat()
+#' generate_board_mat(n = 8, p = 0.75)
 generate_board_mat <- function(n=5, p=0.25){
   assert_that(is.numeric(n) && is.numeric(p), msg="n and p must be numerics")
   assert_that(length(n) == 1 && length(p) == 1, msg="n and p must be single values")
@@ -36,9 +19,6 @@ generate_board_mat <- function(n=5, p=0.25){
   blocked_tiles <- sample(1:num_tiles, size=num_blocked, replace=FALSE)
   matrix(ifelse(1:num_tiles %in% blocked_tiles, 0, 1), nrow=n)
 }
-
-generate_board_mat()
-generate_board_mat(n = 8, p = 0.75)
 
 #' is_valid()
 #'
