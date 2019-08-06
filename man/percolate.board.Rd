@@ -16,20 +16,20 @@ a list containing the board once water has been filled, and whether the board pe
 percolate.board()
 }
 \examples{
-mat_example_list <- list(matrix(c(1,1,1,1,0, 
-                                  0,0,0,1,0, 
-                                  1,1,1,1,0, 
-                                  0,1,0,0,0, 
-                                  0,1,1,1,1), 5, 5), 
+mat_example_list <- list(matrix(c(1,1,1,1,0,
+                                  0,0,0,1,0,
+                                  1,1,1,1,0,
+                                  0,1,0,0,0,
+                                  0,1,1,1,1), 5, 5),
                         matrix(c(1,1,1,1,0,
-                                 0,0,0,1,0, 
-                                 0,1,1,1,0, 
-                                 0,1,0,0,0, 
+                                 0,0,0,1,0,
+                                 0,1,1,1,0,
+                                 0,1,0,0,0,
                                  0,1,1,1,1), 5, 5),
                         matrix(c(1,1,1,1,0,
-                                 0,0,0,1,0, 
-                                 0,1,1,0,0, 
-                                 0,1,0,0,0, 
+                                 0,0,0,1,0,
+                                 0,1,1,0,0,
+                                 0,1,0,0,0,
                                  0,1,1,1,1), 5, 5))
 
 board_example_list <- lapply(mat_example_list, FUN=board)

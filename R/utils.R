@@ -7,6 +7,8 @@ library(assertthat)
 #' @param p specifies the proportion of the board that is blocked (between 0 an 1)
 #'
 #' @return an nxn board with p-proportion squares blocked (delineated by 0's and 1's)
+#'
+#' @export
 #' @examples generate_board_mat()
 #' generate_board_mat(n = 8, p = 0.75)
 generate_board_mat <- function(n=5, p=0.25){
@@ -44,7 +46,7 @@ string_to_board <- function(list_mat){
   assert_that(length(list_mat) == 2)
   assert_that("n" %in% names(list_mat) && "mat" %in% names(list_mat))
   assert_that(is.numeric(list_mat$n))
-  
+
   n <- list_mat$n
   str <- list_mat$mat
   mat <- matrix(nrow=n, ncol=n)
@@ -64,14 +66,14 @@ string_to_board <- function(list_mat){
 
 #' mat_list_to_board() function that converts list with sizes and string matrices to list of boards
 #'
-#' @param mat_list has two components of equivalent length: 
-#' n, which specifies the size of each board and 
+#' @param mat_list has two components of equivalent length:
+#' n, which specifies the size of each board and
 #' mat, which is a string version of each board (of length n^2, for the corresponding n)
 #'
 #' @return a list of boards converted from the strings, or NA if incorrectly formatted
 mat_list_to_board <- function(mat_list){
   assert_that(is.list(mat_list))
-  
+
   return(lapply(mat_list, FUN=string_to_board))
 }
 
@@ -95,16 +97,16 @@ scrape_mat <- function(mat_obj){
 #' @return a list of boards as specified inside the file
 #' @examples read_boards("https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_example.txt")
 read_boards <- function(file){
-  readLines(file) %>% 
-    .[which(.!="")] %>% 
-    paste(collapse="\n") %>% 
-    strsplit(split="") %>% 
-    unlist %>% 
-    .[which(. != " ")] %>% 
-    paste(collapse="") %>% 
-    strsplit(split="----") %>% 
-    unlist %>% 
-    .[which(.!="")] %>% 
-    lapply(FUN=scrape_mat) %>% 
+  readLines(file) %>%
+    .[which(.!="")] %>%
+    paste(collapse="\n") %>%
+    strsplit(split="") %>%
+    unlist %>%
+    .[which(. != " ")] %>%
+    paste(collapse="") %>%
+    strsplit(split="----") %>%
+    unlist %>%
+    .[which(.!="")] %>%
+    lapply(FUN=scrape_mat) %>%
     mat_list_to_board
 }

@@ -7,8 +7,8 @@
 mat_list_to_board(mat_list)
 }
 \arguments{
-\item{mat_list}{has two components of equivalent length: 
-n, which specifies the size of each board and 
+\item{mat_list}{has two components of equivalent length:
+n, which specifies the size of each board and
 mat, which is a string version of each board (of length n^2, for the corresponding n)}
 }
 \value{

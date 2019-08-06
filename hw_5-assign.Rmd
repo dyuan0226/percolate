@@ -326,7 +326,7 @@ logarithmic in its complexity.
 
 **Approach 2:** remove the `eval = F` in the following code and replace the `...` with the path to your project (do global path for be safe). Make this string of the directory contains a "/" at the end of it. This should load all your functions in (I'm assuming your haven't been putting your code in 2 places).
 
-```{r}
+```{r eval = F}
 source("https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/load_my_files_function.R")
 load_my_files("C:/Users/david/OneDrive/Documents/CMU/2019 Summer/36350/percolate/")
 ```

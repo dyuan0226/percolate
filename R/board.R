@@ -8,6 +8,7 @@ library(assertthat)
 #' @param p specifies proportion of board blocked, must be between 0 and 1
 #'
 #' @return valid board object with attributes n and p
+#' @export
 #' @examples board(generate_board_mat())
 #' board(n=6, p=0.3)
 board <- function(mat=NULL, n=5, p=0.25){
@@ -22,7 +23,7 @@ board <- function(mat=NULL, n=5, p=0.25){
     assert_that(length(n) == 1 && length(p) == 1, msg="n and p must be single values")
     assert_that(as.integer(n) == n && n > 0, msg="n must be a positive integer")
     assert_that(0<=p && p<=1, msg="p must be between 0 and 1")
-    
+
     mat2 <- generate_board_mat(n=n, p=p)
     class(mat2) <- c("board", "matrix")
     attr(mat2, "n") <- n

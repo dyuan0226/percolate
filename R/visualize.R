@@ -8,6 +8,7 @@ library(tidyverse)
 #'
 #' @return the plot of the board x
 #'
+#' @export
 #' @examples board_example <- board(matrix(c(0,1,1,1,0,
 #' 0,1,1,0,1,
 #' 0,0,1,0,0,
@@ -22,13 +23,13 @@ plot.board <- function(x){
   board_df <- data.frame(row=as.vector(row(x)), col=as.vector(col(x)), val=as.vector(x))
   board_df$val <- factor(board_df$val)
   title <- paste("Size:", n)
-  ggplot(data=board_df, mapping=aes(x=row, y=col, fill=val)) + 
-    geom_tile() + 
+  ggplot(data=board_df, mapping=aes(x=row, y=col, fill=val)) +
+    geom_tile() +
     labs(title=title) +
     theme_void() +
-    theme(legend.position="none", 
-          plot.title=element_text(hjust=0.5)) + 
-    scale_fill_manual(values=c("0"="black", "1"="white", "2"="lightblue3")) + 
-    scale_x_reverse() + 
+    theme(legend.position="none",
+          plot.title=element_text(hjust=0.5)) +
+    scale_fill_manual(values=c("0"="black", "1"="white", "2"="lightblue3")) +
+    scale_x_reverse() +
     coord_flip()
 }
