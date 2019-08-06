@@ -289,6 +289,33 @@ For `p = 0.4`, run 10 trials for each value of `n` from `10` to `100` with spaci
 
 Then, make a line plot of elapsed time verses `n^2`. Label your plot appropriately. After inspecting your graph, does it seem like your algorithm's elapsed time (often called the complexity of the algorithm) linear with `n^2`? (For students more comfortable with CS theory: you can try other values of `n` and change your x-axis to other terms such as `n^2*log(n)` if needed.)
 
+```{r}
+library(tidyverse)
+
+test_n <- seq(10, 100, by=10)
+
+perc_time_avg <- function(n, p=0.4, trials=10){
+  times <- vector()
+  for (i in 1:trials){
+    my_board <- board(generate_board_mat(n=n, p=p))
+    trial_time <- system.time(percolate(my_board))[3]
+    times <- c(times, trial_time)
+  }
+  return(mean(times))
+}
+
+avg_times <- sapply(test_n, FUN=perc_time_avg)
+time_df <- data.frame(size=test_n^2, avg_time=avg_times)
+
+time_lm <- lm(avg_time ~ size, data=time_df)
+
+ggplot(data=time_df, aes(x=size, y=avg_time)) + 
+  geom_line() + 
+  labs(title="Average Runtime by Size of Board", x="Size of Board (n^2)", y="Average Runtime") + 
+  geom_abline(color="red", slope=coef(time_lm)["size"], intercept=coef(time_lm)["(Intercept)"])
+```
+
+
 ```
 My algorithm's elapsed time doesn't seem linear with n^2; it seems more polynomial or 
 logarithmic in its complexity.
@@ -322,6 +349,37 @@ This challenge problem is for the CS-savy students. The trick is to use efficien
 That is, there will be a total of `20*21*3 = 1260` times `percolate()` will be called. 
 
 Then plot 3 curves (one for each setting of `n`), all on the same plot, of percentage of boards that percolated verses the value of `p` (using only a single data.frame - think back to `dplyr` and `tidyr`). The curves should be a black line for `n = 5`, red for `n = 10` and blue for `n = 25`. Add appropriate axes labels and a legend. 
+
+```{r}
+test_p <- seq(0, 1, by=0.05)
+
+perc_percentage <- function(n, p, trials=20){
+  successes <- 0
+  for (i in 1:trials){
+    my_board <- board(generate_board_mat(n=n, p=p))
+    if (percolate(my_board)$result){
+      successes <- successes + 1
+    }
+  }
+  return(successes/trials)
+}
+
+n_5_percentage <- sapply(test_p, FUN=perc_percentage, n=5)
+n_10_percentage <- sapply(test_p, FUN=perc_percentage, n=10)
+n_25_percentage <- sapply(test_p, FUN=perc_percentage, n=25)
+percentage_df <- data.frame(p=test_p, n5=n_5_percentage, n10=n_10_percentage, n25=n_25_percentage) %>% 
+  gather(key = "size", value = "percentage", 2:4) %>% 
+  mutate(size=factor(size, levels=unique(.$size)))
+
+ggplot(data=percentage_df, aes(x=p, y=percentage, color=size)) + 
+  geom_line() + 
+  scale_fill_manual(values=c("blue", "red", "black")) + 
+  labs(title="Percentage of Percolating Boards by Percentage of Squares Blocked", 
+       x="Percentage of Squares Blocked",
+       y="Percentage of Boards Percolating") +
+  scale_color_manual(values=c("black", "red", "blue")) + 
+  scale_x_continuous(breaks=seq(0, 1, by=0.2))
+```
 
 After inspecting your graph, do you notice a "phase transition" effect where a small change in `p` results in a large change in the probability of percolation? Roughly what value of `p` do you estimate this value to be, and how do you think it relates to `n`?
 
@@ -468,7 +526,7 @@ You'll probably notice that the function `create_package` notices a lot of struc
 
 To set up the package dependencies we'll be needing today run the following:
 
-```{r eval = F}
+```{r}
 usethis::use_testthat()
 usethis::use_package("assertthat")
 usethis::use_package("ggplot2")
@@ -506,4 +564,3 @@ Please remove all text and code except: 1g, 3a, 3c and 4d (including the `devtoo
 
 To finish of the assignment, go to this [google form](https://forms.gle/8KnzHTXfpoCeZq1s5) and provide your name and
 github repository link (in the requested format).
-
