@@ -94,6 +94,7 @@ In this section we will also create the function `is_valid()` and the method `pl
 ```{r message =F, warning = F}
 library(assertthat)
 library(testthat)
+library(percolate)
 ```
 
 **Approach 3:** To make sure you have a `tests/testthat` folder, run the commands in the console below while you're in your package:
@@ -327,7 +328,7 @@ logarithmic in its complexity.
 
 ```{r}
 source("https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/load_my_files_function.R")
-load_my_files("https://github.com/dyuan0226/percolate/")
+load_my_files("C:/Users/david/OneDrive/Documents/CMU/2019 Summer/36350/percolate/")
 ```
 
 **Approach 3:** remove the `eval = F` in the following code and replace the `...` with the path to your project (do global path for be safe).
