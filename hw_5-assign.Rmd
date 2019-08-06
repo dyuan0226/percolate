@@ -444,15 +444,9 @@ example_board_list
 library(gridExtra)
 library(rlist)
 
-path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_test.txt"
-boards <- read_boards(path)
-both_boards <- list()
-for (i in 1:length(boards)){
-  this_board <- boards[[i]]
-  plot(this_board)
-  plot(percolate(this_board)[[1]])
-  both_boards <- list.append(both_boards, plot(this_board), plot(percolate(this_board)[[1]]))
-}
+path <- "https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_large.txt"
+this_board <- read_boards(path)[[1]]
+both_boards <- list(original=plot(this_board), new=plot(percolate(this_board)[[1]]))
 
 grid.arrange(grobs=both_boards, ncol=2)
 ```
