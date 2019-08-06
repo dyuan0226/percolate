@@ -2,10 +2,12 @@ library(assertthat)
 library(gridExtra)
 
 
-#' @param x
+#' percolate() generic function
 #'
+#' @param x
 #' @param ...
 #'
+#' @return
 #' @export
 percolate <- function(x, ...) {
   UseMethod("percolate")

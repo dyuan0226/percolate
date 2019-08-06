@@ -98,7 +98,7 @@ scrape_mat <- function(mat_obj){
 #'
 #' @return a list of boards as specified inside the file
 #'
-#' @exports
+#' @export
 #' @examples read_boards("https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_example.txt")
 read_boards <- function(file){
   readLines(file) %>%
