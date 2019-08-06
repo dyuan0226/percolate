@@ -2,8 +2,14 @@ library(assertthat)
 library(gridExtra)
 
 
+#' @param x
+#'
+#' @param ...
+#'
 #' @export
-percolate <- function(x, ...) UseMethod("percolate")
+percolate <- function(x, ...) {
+  UseMethod("percolate")
+}
 
 #' percolate.board()
 #'

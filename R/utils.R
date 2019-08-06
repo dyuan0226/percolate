@@ -27,6 +27,8 @@ generate_board_mat <- function(n=5, p=0.25){
 #' @param mat specifies our test variables
 #'
 #' @return whether or not `mat` is a valid board
+#'
+#' @export
 #' @examples is_valid(generate_board_mat())
 #' is_valid(generate_board_mat(n=1))
 is_valid <- function(mat){
@@ -95,6 +97,8 @@ scrape_mat <- function(mat_obj){
 #' @param file specifies the path of the input file
 #'
 #' @return a list of boards as specified inside the file
+#'
+#' @exports
 #' @examples read_boards("https://raw.githubusercontent.com/benjaminleroy/36-350-summer-data/master/Week5/percolation_write_example.txt")
 read_boards <- function(file){
   readLines(file) %>%
